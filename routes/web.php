@@ -11,13 +11,16 @@
 |
 */
 
-Route::get('/', function () {
-    return view('site.index');
-});
-Route::get('/portfolio', function () {
-    return view('site.portfolio', ['title' => 'Портфолио']);
-});
+Route::get('/', 'SiteController@index')->name('index');
+Route::get('/portfolio', 'SiteController@portfolio')->name('portfolio.show');
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::prefix('/admin')->group(function () {
+    Auth::routes([
+        'register' => false,
+        'reset' => false,
+        'verify' => false,
+    ]);
+    Route::middleware('auth')->group(function () {
+        Route::resource('portfolio', 'Admin\PortfolioController')->except(['show']);
+    });
+});
