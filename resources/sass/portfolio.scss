@@ -1,0 +1,62 @@
+.portfolio {
+    overflow: hidden;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    transition: box-shadow 0.2s;
+
+    &:hover {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    &__title, &__full-text-angle, &__full-text-times {
+        color: $site-green;
+        cursor: pointer;
+    }
+
+    &__title {
+        font-size: 1.5rem;
+    }
+
+    &__full-text-angle, &__full-text-times {
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: 1rem;
+    }
+
+    &__full-text-times {
+        font-weight: bold;
+    }
+
+    &__full-text {
+        position: absolute;
+        top: 100%;
+        transition: top 0.5s;
+        height: 100%;
+        overflow-y: auto;
+    }
+
+    &__full-text_show {
+        top: 0;
+    }
+
+    &__full-text, &__short-text, &__links-container {
+        background-color: #fff;
+    }
+
+    &__short-text p {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    &__link {
+        color: $amber;
+        font-size: 1.5rem;
+        margin-right: 1em;
+    }
+
+    &__link:hover i {
+        color: $amber;
+    }
+}

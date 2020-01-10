@@ -5,8 +5,10 @@
  */
 
 require('./bootstrap');
+require('lightgallery/src/js/lightgallery');
+require('./menu');
 
-window.Vue = require('vue');
+//window.Vue = require('vue');
 
 /**
  * The following block of code may be used to automatically register your
@@ -19,7 +21,7 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+//Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -27,6 +29,23 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+/*
 const app = new Vue({
     el: '#app',
 });
+*/
+$(document).ready(function () {
+
+
+    // Открытие полного текста элемента портфолио
+    $(".portfolio__full-text-toggle").click(function () {
+        $(this).parents('.portfolio').find(".portfolio__full-text").toggleClass("portfolio__full-text_show");
+    });
+
+    // Включение галереи для портфолио
+    $('.portfolio__links-container').lightGallery({
+        selector: '.gallery-image',
+    });
+});
+
+

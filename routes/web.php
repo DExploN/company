@@ -12,7 +12,10 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('site.index');
+});
+Route::get('/portfolio', function () {
+    return view('site.portfolio', ['title' => 'Портфолио']);
 });
 
 Auth::routes();

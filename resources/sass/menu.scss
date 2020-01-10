@@ -1,0 +1,94 @@
+.menu {
+    width: 280px;
+    position: fixed;
+    background-color: #fff;
+    height: 100%;
+    top: 60px;
+    margin-left: -280px;
+    transition: margin-left 0.3s;
+
+    &__languages {
+        background-color: $blue-grey;
+        display: flex;
+        justify-content: center;
+        padding-bottom: 1.5rem;
+        padding-top: 1.5rem;
+    }
+
+    &__lang {
+
+        padding: 3px 4px;
+        margin: 0px 8px;
+        border-radius: 50%;
+        color: #fff;
+        transition: background-color 0.3s;
+    }
+
+    &__lang:hover {
+        color: #fff;
+        background-color: #5d6468;
+        text-decoration: none;
+    }
+
+    &__lang-active {
+        background-color: $site-green;
+    }
+
+    &__lang-active:hover {
+        background-color: $site-green;
+        cursor: default;
+    }
+
+    &__link {
+        padding: 20px 28px;
+        color: $text-color;
+        align-items: center;
+        display: flex;
+        transition: background-color 0.2s;
+    }
+
+    &__link-picture {
+        margin-left: 8px;
+        margin-right: 36px;
+        color: $site-green;
+        font-size: 20px;
+    }
+
+    &__link:hover {
+        text-decoration: none;
+        background-color: #c6c6c6;
+        color: $text-color;
+    }
+
+    &__link-active {
+        background-color: #dddddd;
+    }
+
+}
+
+.menu-active {
+    margin-left: 0 !important;
+    z-index: 999 !important;
+}
+
+@media all and (min-width: 992px) {
+    .menu {
+        top: 196px;
+        margin-left: 0;
+
+        &__languages {
+            padding-top: 0;
+        }
+    }
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 998;
+    opacity: 0;
+    top: 60px;
+}

@@ -4,5 +4,116 @@
 // Variables
 @import 'variables';
 
+// Reset css
+
+@import "reset";
+
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+@import "~normalize.css/normalize.css";
+
+@import '~@fortawesome/fontawesome-free/css/all.min.css';
+
+@import "~lightgallery/src/css/lightgallery.css";
+@import "portfolio";
+@import "menu";
+
+body {
+    color: rgba(0, 0, 0, 0.87);
+    background-color: #eeeeee;
+}
+
+h1, h2 {
+    color: $site-green;
+}
+a {
+    color: $light-blue;
+    text-decoration: none;
+}
+#right-column {
+    margin-top: 60px;
+}
+
+#header {
+    background-color: $blue-grey;
+    position: fixed;
+    width: 100%;
+    height: 60px;
+    padding: 10px;
+    z-index: 900;
+}
+
+.logo-h {
+    height: 40px;
+    max-width: 60%;
+}
+
+
+.tree-color {
+    display: flex;
+    height: 15px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.16), 0 6px 8px 0 rgba(0, 0, 0, 0.12);
+}
+
+.tree-color span:nth-child(1) {
+    background-color: $light-blue;
+    width: 30%;
+}
+
+.tree-color span:nth-child(2) {
+    background-color: $amber;
+    width: 40%;
+}
+
+.tree-color span:nth-child(3) {
+    background-color: $site-green;
+    width: 30%;
+}
+
+.fa-android-old:before {
+    content: "\f17b";
+}
+
+.title-box {
+    padding: 7px 0 3px;
+    background-color: $blue-grey;
+
+    &__text, &__picture {
+        color: #fff;
+        font-size: 1.8rem;
+        display: inline-block;
+        margin-left: 0.5rem;
+    }
+
+}
+
+@media all and (min-width: 992px) {
+    #left-column {
+        display: block;
+        width: 280px;
+        position: fixed;
+        box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
+        height: 100%;
+    }
+    #header {
+        width: 280px;
+        padding: 28px 28px 0;
+        background-color: $blue-grey;
+        height: 196px;
+    }
+
+    #right-column {
+        margin-left: 280px;
+        margin-top: 0;
+    }
+    .overlay {
+        display: none !important;
+    }
+
+
+    .container {
+        max-width: 1340px !important;
+    }
+}
+
