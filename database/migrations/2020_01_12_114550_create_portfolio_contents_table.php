@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddPortfoliosTable extends Migration
+class CreatePortfolioContentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,15 @@ class AddPortfoliosTable extends Migration
      */
     public function up()
     {
-        Schema::create('portfolios', function (Blueprint $table) {
+        Schema::create('portfolio_contents', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('portfolio_id');
+            $table->char('language', 2)->index();
             $table->text('title');
-            $table->text('image');
             $table->text('description');
             $table->text('text');
-            $table->text('android_link')->nullable();
-            $table->text('apple_link')->nullable();
             $table->timestamps();
+            $table->foreign('portfolio_id')->on('portfolios')->references('id')->onDelete('cascade');
         });
     }
 
@@ -32,6 +32,6 @@ class AddPortfoliosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('portfolios');
+        Schema::dropIfExists('portfolio_contents');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Portfolio;
 use Illuminate\Http\Request;
 
 class SiteController extends Controller
@@ -21,6 +22,7 @@ class SiteController extends Controller
         $keywords = 'Ключевые слова портфолио';
 
         $h1 = 'H1 Портволио';
-        return view('site.portfolio', compact('title', 'description', 'keywords', 'h1'));
+        $portfolios = Portfolio::with('contents')->get();
+        return view('site.portfolio', compact('title', 'description', 'keywords', 'h1', 'portfolios'));
     }
 }

@@ -16,7 +16,7 @@ class UsersSeeder extends Seeder
         return User::create([
             'name' => 'Admin',
             'email' => 'admin@softinvent.ru',
-            'password' => Hash::make('bigsecret'),
+            'password' => Hash::make('secret'),
         ]);
     }
 }

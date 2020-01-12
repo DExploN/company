@@ -32,8 +32,14 @@
 
         <nav class="menu">
             <div class="menu__languages">
-                <a class="menu__lang menu__lang-active" href="#">RU</a>
-                <a class="menu__lang" href="#">EN</a>
+                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+
+                    <a class="menu__lang @if(LaravelLocalization::getCurrentLocale() === $localeCode) menu__lang-active @endif"
+                       rel="alternate" hreflang="{{ $localeCode }}"
+                       href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                        {{ mb_strtoupper($localeCode) }}
+                    </a>
+                @endforeach
             </div>
             <ul class="menu__list">
                 <li><a class="menu__link" href="/"><i class="menu__link-picture fas fa-address-card fa-fw"></i>О

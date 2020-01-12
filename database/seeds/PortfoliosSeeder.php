@@ -1,6 +1,9 @@
 <?php
 
+use App\Models\Portfolio;
+use App\Models\PortfolioContent;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\File;
 
 class PortfoliosSeeder extends Seeder
 {
@@ -11,9 +14,10 @@ class PortfoliosSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Models\Portfolio::class, 5)->make()->each(function ($portfolio) {
+        File::makeDirectory(storage_path('app/public/' . config('settings.portfolio.logo.path')), '0755', true, true);
+        factory(Portfolio::class, 5)->make()->each(function ($portfolio) {
             $fileName = uniqid('') . '.jpg';
-            $fileDir = public_path('storage/' . config('settings.portfolio.logo.path') . '/' . $fileName);
+            $fileDir = storage_path('app/public/' . config('settings.portfolio.logo.path') . '/' . $fileName);
             copy('https://picsum.photos/' .
                 config('settings.portfolio.logo.width') .
                 '/' .
@@ -21,6 +25,13 @@ class PortfoliosSeeder extends Seeder
                 , $fileDir);
             $portfolio->image = $fileName;
             $portfolio->save();
+
+            $contents = [];
+            foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties) {
+                $contents[] = factory(PortfolioContent::class)->make(['language' => $localeCode]);
+            }
+
+            $portfolio->contents()->saveMany($contents);
         });
 
 
