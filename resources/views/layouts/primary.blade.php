@@ -22,7 +22,7 @@
 
     <aside id="left-column" class="navbar-expand-lg navbar-dark">
         <header id="header">
-            <button class="navbar-toggler" type="button">
+            <button class="navbar-toggler menu-toggler" type="button">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <img src="{{asset('images/logo_ru_v.svg')}}" class="d-none d-lg-inline-block"/>
@@ -64,11 +64,11 @@
         </nav>
     </aside>
     <main id="right-column">
-        @if(isset($title))
+        @if(isset($h1))
             <div class="title-box">
                 <div class="container ">
                     <i class="title-box__picture fas fa-briefcase fa-fw"></i>
-                    <h1 class="title-box__text">{{$title}}</h1>
+                    <h1 class="title-box__text">{{$h1}}</h1>
                 </div>
             </div>
         @else
@@ -83,7 +83,7 @@
             @yield('content')
         </div>
     </main>
-    <div class="overlay"></div>
+    <div class="overlay menu-toggler"></div>
 </div>
 <!-- its stop transition css bug -->
 <script></script>

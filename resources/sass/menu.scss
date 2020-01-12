@@ -90,7 +90,7 @@
 }
 
 .overlay {
-    display: none;
+    display: block;
     position: fixed;
     width: 100vw;
     height: 100vh;
@@ -98,4 +98,12 @@
     z-index: 998;
     opacity: 0;
     top: 60px;
+    transition: all 0.3s;
+    visibility: hidden;
+    transition-property: opacity, visibility;
+}
+
+.overlay-active {
+    opacity: 1;
+    visibility: visible;
 }

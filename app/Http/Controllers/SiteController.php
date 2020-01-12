@@ -8,11 +8,10 @@ class SiteController extends Controller
 {
     public function index()
     {
+        $title = 'Заголовок главной';
         $description = 'Описание главной';
         $keywords = 'Ключевые слова главной';
-
-        $h1 = 'H1 главной';
-        return view('site.index', compact('description', 'keywords', 'h1'));
+        return view('site.index', compact('description', 'keywords', 'title'));
     }
 
     public function portfolio()

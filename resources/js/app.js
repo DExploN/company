@@ -6,8 +6,6 @@
 
 require('./bootstrap');
 require('lightgallery/src/js/lightgallery');
-require('./menu');
-
 //window.Vue = require('vue');
 
 /**
@@ -36,15 +34,20 @@ const app = new Vue({
 */
 $(document).ready(function () {
 
-
     // Открытие полного текста элемента портфолио
-    $(".portfolio__full-text-toggle").click(function () {
+    $(".portfolio__full-text-toggler").click(function () {
         $(this).parents('.portfolio').find(".portfolio__full-text").toggleClass("portfolio__full-text_show");
     });
 
     // Включение галереи для портфолио
     $('.portfolio__links-container').lightGallery({
         selector: '.gallery-image',
+    });
+
+    // Отображение меню на маленьких разрешениях
+    $(".menu-toggler").click(function () {
+        $(".menu").toggleClass('menu-active');
+        $(".overlay").toggleClass('overlay-active');
     });
 });
 
