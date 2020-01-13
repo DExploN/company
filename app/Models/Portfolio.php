@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\App;
 
 class Portfolio extends Model
@@ -10,8 +11,19 @@ class Portfolio extends Model
     protected $fillable = [
         'image',
         'android_link',
-        'apple_link'
+        'apple_link',
+        'year'
     ];
+
+    public function getImageUrlAttribute()
+    {
+        return asset('storage/' . config('settings.portfolio.logo.path')) . '/' . $this->image;
+    }
+
+    public function allContents(): HasMany
+    {
+        return $this->hasMany(PortfolioContent::class);
+    }
 
     public function contents()
     {
@@ -20,9 +32,21 @@ class Portfolio extends Model
             ->orWhere('language', App::getLocale());
     }
 
-    public function trans($attribute)
+    public function images()
     {
-        $content = $this->contents->firstWhere('language', App::getLocale()) ?? $this->contents->first();
+        return $this->hasMany(PortfolioImage::class);
+    }
+
+    public function trans($attribute, $locale = null)
+    {
+        if ($locale) {
+            $content = $this->allContents->firstWhere('language', $locale);
+        } else {
+            $content = $this->contents->firstWhere('language', App::getLocale()) ?? $this->contents->first();
+        }
+        if (!$content) {
+            return null;
+        }
         return $content->{$attribute};
     }
 }

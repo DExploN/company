@@ -49,6 +49,10 @@ $(document).ready(function () {
         $(".menu").toggleClass('menu-active');
         $(".overlay").toggleClass('overlay-active');
     });
+
+    $(".add-image").click(function () {
+        $(this).siblings('input').eq(0).clone().appendTo($(this).parent());
+    });
 });
 
 

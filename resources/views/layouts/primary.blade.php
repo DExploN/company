@@ -44,7 +44,8 @@
             <ul class="menu__list">
                 <li><a class="menu__link" href="/"><i class="menu__link-picture fas fa-address-card fa-fw"></i>О
                         Компании</a></li>
-                <li><a class="menu__link" href="/portfolio"><i class="menu__link-picture fas fa-briefcase fa-fw"></i>Портфолио</a>
+                <li><a class="menu__link" href="{{route('portfolio.index')}}"><i
+                            class="menu__link-picture fas fa-briefcase fa-fw"></i>Портфолио</a>
                 </li>
                 <li>
                     <a class="menu__link" href="#"><i class="menu__link-picture fas fa-user-plus fa-fw"></i>Вакансии</a>
@@ -53,7 +54,7 @@
                 @auth()
                     <h5 class="menu__admin-title">Админ панель</h5>
 
-                    <li><a class="menu__link" href="{{route('portfolio.index')}}"><i
+                    <li><a class="menu__link" href="{{route('admin.portfolio.index')}}"><i
                                 class="menu__link-picture fas fa-briefcase fa-fw"></i>Портфолио</a>
                     </li>
                     <li>
@@ -86,6 +87,29 @@
         @endif
 
         <div class="container my-4 px-md-4 ">
+            @if(session('success-message'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{session('success-message')}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
+
+
+            @if ($errors->any())
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
+
             @yield('content')
         </div>
     </main>
