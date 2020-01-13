@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePortfoliosTable extends Migration
+class CreatePortfolioImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreatePortfoliosTable extends Migration
      */
     public function up()
     {
-        Schema::create('portfolios', function (Blueprint $table) {
+        Schema::create('portfolio_images', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->text('image');
-            $table->smallInteger('year');
-            $table->text('android_link')->nullable();
-            $table->text('apple_link')->nullable();
+            $table->unsignedBigInteger('portfolio_id');
+            $table->text('name');
             $table->timestamps();
+            $table->foreign('portfolio_id')->on('portfolios')->references('id')->onDelete('cascade');
         });
     }
 
@@ -30,6 +29,6 @@ class CreatePortfoliosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('portfolios');
+        Schema::dropIfExists('portfolio_images');
     }
 }
