@@ -42,20 +42,24 @@
                 @endforeach
             </div>
             <ul class="menu__list">
-                <li><a class="menu__link" href="/"><i class="menu__link-picture fas fa-address-card fa-fw"></i>О
-                        Компании</a></li>
+                <li><a class="menu__link" href="/"><i
+                            class="menu__link-picture fas fa-address-card fa-fw"></i>@lang('About company')</a></li>
                 <li><a class="menu__link" href="{{route('portfolio.index')}}"><i
-                            class="menu__link-picture fas fa-briefcase fa-fw"></i>Портфолио</a>
+                            class="menu__link-picture fas fa-briefcase fa-fw"></i>@lang('Portfolio')</a>
                 </li>
                 <li>
-                    <a class="menu__link" href="#"><i class="menu__link-picture fas fa-user-plus fa-fw"></i>Вакансии</a>
+                    <a class="menu__link" href="#"><i
+                            class="menu__link-picture fas fa-user-plus fa-fw"></i>@lang('Jobs')</a>
                 </li>
 
                 @auth()
-                    <h5 class="menu__admin-title">Админ панель</h5>
+                    <h5 class="menu__admin-title">@lang('Admin dashboard')</h5>
 
                     <li><a class="menu__link" href="{{route('admin.portfolio.index')}}"><i
-                                class="menu__link-picture fas fa-briefcase fa-fw"></i>Портфолио</a>
+                                class="menu__link-picture fas fa-briefcase fa-fw"></i>@lang('Portfolio')</a>
+                    </li>
+                    <li><a class="menu__link" href="/admin/translations">
+                            <i class="menu__link-picture fas fa-language fa-fw"></i>@lang('Translation manager')</a>
                     </li>
                     <li>
                         <a class="menu__link" href="{{ route('logout') }}"

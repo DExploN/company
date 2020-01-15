@@ -9,19 +9,19 @@ class SiteController extends Controller
 {
     public function index()
     {
-        $title = 'Заголовок главной';
-        $description = 'Описание главной';
-        $keywords = 'Ключевые слова главной';
+        $title = trans('main title');
+        $description = trans('main description');
+        $keywords = trans('main keywords');
         return view('site.index', compact('description', 'keywords', 'title'));
     }
 
     public function portfolio()
     {
-        $title = 'Заголовок портфолио';
-        $description = 'Описание портфолио';
-        $keywords = 'Ключевые слова портфолио';
+        $title = trans('portfolio title');
+        $description = trans('portfolio description');
+        $keywords = trans('portfolio keywords');
 
-        $h1 = 'H1 Портволио';
+        $h1 = trans('portfolio h1');
         $portfolios = Portfolio::with(['contents', 'media'])->get();
         return view('site.portfolio', compact('title', 'description', 'keywords', 'h1', 'portfolios'));
     }

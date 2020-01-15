@@ -60,4 +60,9 @@
     &__link:hover i {
         color: $amber;
     }
+
+    &__imgcontainer {
+        max-height: 250px;
+        overflow: hidden;
+    }
 }

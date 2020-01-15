@@ -18,7 +18,7 @@ class PortfoliosSeeder extends Seeder
 
         factory(Portfolio::class, 5)->make()->each(function ($portfolio) {
 
-            $imgUrl = 'https://picsum.photos/500/300';
+            $imgUrl = 'https://picsum.photos/1000/600';
             $portfolio->save();
             $contents = [];
             foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties) {
@@ -36,15 +36,4 @@ class PortfoliosSeeder extends Seeder
 
     }
 
-    private function getImage($path)
-    {
-        $fileName = uniqid('') . '.jpg';
-        $fileDir = storage_path('app/public/' . $path . '/' . $fileName);
-        copy('https://picsum.photos/' .
-            config('settings.portfolio.logo.width') .
-            '/' .
-            config('settings.portfolio.logo.height')
-            , $fileDir);
-        return $fileName;
-    }
 }

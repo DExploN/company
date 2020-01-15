@@ -15,9 +15,12 @@ class Portfolio extends Model implements HasMedia
 
     public function registerMediaConversions(Media $media = null)
     {
-        $this->addMediaConversion('')
-            ->width(500)
-            ->height(300);
+        if ($media->collection_name === 'logo') {
+            $this->addMediaConversion('needed')
+                ->width(config('settings.portfolio.logo.width'))
+                ->height(config('settings.portfolio.logo.height'));
+        }
+
     }
 
     protected $fillable = [

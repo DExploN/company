@@ -4,8 +4,10 @@
         @foreach($portfolios as $portfolio)
             <div class="col-12 col-md-6 mb-4">
                 <div class="portfolio card">
-                    <img src="{{($img = $portfolio->getMedia('logo')->first())? $img->getUrl() : ''}}"
-                         class="card-img-top portfolio__image">
+                    <div class="portfolio__imgcontainer">
+                        <img src="{{($img = $portfolio->getMedia('logo')->first())? $img->getUrl('needed') : ''}}"
+                             class="card-img-top portfolio__image">
+                    </div>
                     <div class="card-body portfolio__short-text">
                         <div class="position-relative">
                             <span

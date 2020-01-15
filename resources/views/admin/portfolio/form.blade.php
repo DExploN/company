@@ -34,7 +34,7 @@
 <div class="form-group row">
     <label for="gallery" class="col-form-label col-sm-2">@lang('Gallery')</label>
     <div class="col-sm-10 images">
-        <a class="btn-info btn text-white mb-3 add-image">add image</a>
+        <a class="btn-info btn text-white mb-3 add-image">@lang('Add image')</a>
         <input class="form-control-file mb-1" type="file" id="gallery" name="images[]"/>
     </div>
 

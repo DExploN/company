@@ -30,7 +30,7 @@
     </form>
     <div>
 
-        <div><h2>Translations</h2></div>
+        <div><h2>@lang('Translations')</h2></div>
         @foreach($languages as $lang)
             @if($lang != $locale)
                 <div class="btn-group">
