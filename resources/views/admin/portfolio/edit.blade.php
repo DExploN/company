@@ -6,14 +6,14 @@
         @csrf
         @include('admin.portfolio.form')
 
-        @if(count($portfolio->images))
-            @foreach($portfolio->images as $image)
+        @if(count($portfolio->getMedia('gallery')))
+            @foreach($portfolio->getMedia('gallery') as $image)
                 <div class="row mb-2">
                     <div class="col-sm-2 d-flex justify-content-end align-items-center">
                         <input type="checkbox" name="delete_images[]" value="{{$image->id}}"/>
                     </div>
                     <div class="col-sm-10">
-                        <img src="{{$image->url}}"/>
+                        <img src="{{$image->getUrl()}}"/>
                     </div>
                 </div>
             @endforeach

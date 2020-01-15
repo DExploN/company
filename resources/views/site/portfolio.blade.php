@@ -4,7 +4,7 @@
         @foreach($portfolios as $portfolio)
             <div class="col-12 col-md-6 mb-4">
                 <div class="portfolio card">
-                    <img src="{{$portfolio->image_url}}"
+                    <img src="{{($img = $portfolio->getMedia('logo')->first())? $img->getUrl() : ''}}"
                          class="card-img-top portfolio__image">
                     <div class="card-body portfolio__short-text">
                         <div class="position-relative">
@@ -20,12 +20,12 @@
                                 class="fab fa-android-old"></i></a>
                         <a href="{{$portfolio->apple_link}}" class="portfolio__link"><i class="fab fa-apple"></i></a>
 
-                        @foreach($portfolio->images as $image)
+                        @foreach($portfolio->getMedia('gallery') as $image)
                             @if ($loop->first)
-                                <a href="{{$image->url}}" class="portfolio__link gallery-image"><i
+                                <a href="{{$image->getUrl()}}" class="portfolio__link gallery-image"><i
                                         class="far fa-images"></i></a>
                             @else
-                                <a href="{{$image->url}}" class="d-none gallery-image"></a>
+                                <a href="{{$image->getUrl()}}" class="d-none gallery-image"></a>
                             @endif
                         @endforeach
 

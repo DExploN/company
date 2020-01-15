@@ -4,12 +4,12 @@
     <input type="file" class="form-control-file col-sm-10" id="image" name="image"/>
 
 </div>
-@if($portfolio->image)
+@if($logo = $portfolio->getMedia('logo')->first())
 
     <div class="form-group  row">
         <div class="col-sm-2"></div>
         <div class="col-sm-10">
-            <img class="img-fluid" src="{{$portfolio->image_url}}"/>
+            <img class="img-fluid" src="{{$logo->getUrl()}}"/>
         </div>
     </div>
 @endif

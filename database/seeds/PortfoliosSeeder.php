@@ -2,7 +2,6 @@
 
 use App\Models\Portfolio;
 use App\Models\PortfolioContent;
-use App\Models\PortfolioImage;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
 
@@ -15,27 +14,23 @@ class PortfoliosSeeder extends Seeder
      */
     public function run()
     {
-        File::makeDirectory(storage_path('app/public/' . config('settings.portfolio.logo.path')), '0755', true, true);
         File::makeDirectory(storage_path('app/public/' . config('settings.portfolio.images.path')), '0755', true, true);
 
         factory(Portfolio::class, 5)->make()->each(function ($portfolio) {
 
-            $portfolio->image = $this->getImage(config('settings.portfolio.logo.path'));
+            $imgUrl = 'https://picsum.photos/500/300';
             $portfolio->save();
-
             $contents = [];
             foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties) {
                 $contents[] = factory(PortfolioContent::class)->make(['language' => $localeCode]);
             }
-
             $portfolio->contents()->saveMany($contents);
 
-            $images = [];
+            $portfolio->addMediaFromUrl($imgUrl)->toMediaCollection('logo');
 
-            for ($i = 0; $i < 2; $i++) {
-                $images[] = new PortfolioImage(['name' => $this->getImage(config('settings.portfolio.images.path'))]);
-            }
-            $portfolio->images()->saveMany($images);
+            $portfolio->addMediaFromUrl($imgUrl)->toMediaCollection('gallery');
+            $portfolio->addMediaFromUrl($imgUrl)->toMediaCollection('gallery');
+
         });
 
 

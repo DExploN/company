@@ -15,7 +15,6 @@ class CreatePortfoliosTable extends Migration
     {
         Schema::create('portfolios', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->text('image');
             $table->smallInteger('year');
             $table->text('android_link')->nullable();
             $table->text('apple_link')->nullable();

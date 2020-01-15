@@ -24,13 +24,13 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required', 'min:5'],
-            'year' => ['required', 'numeric', 'max:2100'],
-            'description' => ['required', 'min:10'],
-            'text' => ['required', 'min:10'],
-            'image' => ['required', 'max:2048', 'image', 'dimensions:ratio=5/3'],
-            'android_link' => ['url'],
-            'apple_link' => ['url'],
+            'title' => ['required'],
+            'year' => ['required', 'numeric',],
+            'description' => ['required'],
+            'text' => ['required'],
+            'image' => ['required', 'max:2048', 'image'],
+            'android_link' => ['url', 'nullable'],
+            'apple_link' => ['url', 'nullable'],
             'images.*' => ['max:4096', 'image'],
         ];
     }

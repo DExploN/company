@@ -8,10 +8,8 @@ use App\Http\Requests\Portfolio\UpdateLangRequest;
 use App\Http\Requests\Portfolio\UpdateRequest;
 use App\Models\Portfolio;
 use App\Models\PortfolioContent;
-use App\Models\PortfolioImage;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -49,25 +47,20 @@ class PortfolioController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        $portfolioContent = new PortfolioContent($request->only(['title', 'description', 'text']));
-        $portfolioContent->language = config('app.default_locale');
+
 
         $portfolio = new Portfolio($request->only(['android_link', 'apple_link', 'year']));
-        $file = $request->file('image');
-        $file->store(config('settings.portfolio.logo.path'), 'public');
-        $portfolio->image = $file->hashName();
         $portfolio->save();
+
+        $portfolio->addMediaFromRequest('image')->toMediaCollection('logo');
+
+        $portfolioContent = new PortfolioContent($request->only(['title', 'description', 'text']));
+        $portfolioContent->language = config('app.default_locale');
         $portfolio->contents()->save($portfolioContent);
 
-        $images = [];
         if (is_array($request->file('images'))) {
-            foreach ($request->file('images') as $uploadImage) {
-                $uploadImage->store(config('settings.portfolio.images.path'), 'public');
-                $images[] = new PortfolioImage(['name' => $uploadImage->hashName()]);
-            }
-            $portfolio->images()->saveMany($images);
+            $portfolio->addMultipleMediaFromRequest(['images'])->each->toMediaCollection('gallery');
         }
-
 
         return redirect()->route('admin.portfolio.edit', ['portfolio' => $portfolio->id])->with(['success-message' => trans('Portfolio added')]);
     }
@@ -80,7 +73,7 @@ class PortfolioController extends Controller
      */
     public function edit(Portfolio $portfolio)
     {
-        $portfolio->load(['allContents', 'images']);
+        $portfolio->load(['allContents', 'media']);
         $locale = config('app.default_locale');
         $languages = array_keys(LaravelLocalization::getSupportedLocales());
         return view('admin.portfolio.edit', compact('locale', 'portfolio', 'languages'));
@@ -96,12 +89,8 @@ class PortfolioController extends Controller
     public function update(UpdateRequest $request, Portfolio $portfolio)
     {
         if ($request->file('image')) {
-            if (Storage::disk('public')->exists(config('settings.portfolio.logo.path') . '/' . $portfolio->image)) {
-                Storage::disk('public')->delete(config('settings.portfolio.logo.path') . '/' . $portfolio->image);
-            }
-            $file = $request->file('image');
-            $file->store(config('settings.portfolio.logo.path'), 'public');
-            $portfolio->image = $file->hashName();
+            $portfolio->getMedia('logo')->first()->delete();
+            $portfolio->addMediaFromRequest('image')->toMediaCollection('logo');
         }
         $portfolio->fill($request->only(['android_link', 'apple_link', 'year']));
         $portfolio->save();
@@ -112,27 +101,12 @@ class PortfolioController extends Controller
 
         if (is_array($request->input('delete_images'))) {
             foreach ($request->input('delete_images') as $imageId) {
-                $image = PortfolioImage::where('portfolio_id', $portfolio->id)->where('id', $imageId)->first();
-                if ($image) {
-                    $path = config('settings.portfolio.images.path') . '/' . $image->name;
-                    if (Storage::disk('public')->exists($path)) {
-                        Storage::disk('public')->delete($path);
-                    }
-                    $image->delete();
-                }
+                $portfolio->getMedia('gallery')->firstWhere('id', $imageId)->delete();
             }
         }
-
-        $images = [];
         if (is_array($request->file('images'))) {
-            foreach ($request->file('images') as $uploadImage) {
-                $uploadImage->store(config('settings.portfolio.images.path'), 'public');
-                $images[] = new PortfolioImage(['name' => $uploadImage->hashName()]);
-            }
-            $portfolio->images()->saveMany($images);
+            $portfolio->addMultipleMediaFromRequest(['images'])->each->toMediaCollection('gallery');
         }
-
-
         return redirect()->back()->with(['success-message' => trans('Portfolio updated')]);
 
     }
@@ -170,17 +144,6 @@ class PortfolioController extends Controller
      */
     public function destroy(Portfolio $portfolio)
     {
-        if (Storage::disk('public')->exists(config('settings.portfolio.logo.path') . '/' . $portfolio->image)) {
-            Storage::disk('public')->delete(config('settings.portfolio.logo.path') . '/' . $portfolio->image);
-        }
-
-        foreach ($portfolio->images as $image) {
-            $path = config('settings.portfolio.images.path') . '/' . $image->name;
-            if (Storage::disk('public')->exists($path)) {
-                Storage::disk('public')->delete($path);
-            }
-            $image->delete();
-        }
         $portfolio->delete();
         return redirect()->route('admin.portfolio.index')->with('success-message', trans('Portfolio deleted'));
     }

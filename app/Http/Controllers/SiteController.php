@@ -22,7 +22,7 @@ class SiteController extends Controller
         $keywords = 'Ключевые слова портфолио';
 
         $h1 = 'H1 Портволио';
-        $portfolios = Portfolio::with(['contents', 'images'])->get();
+        $portfolios = Portfolio::with(['contents', 'media'])->get();
         return view('site.portfolio', compact('title', 'description', 'keywords', 'h1', 'portfolios'));
     }
 }
