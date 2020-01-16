@@ -1,4 +1,7 @@
 @extends('layouts.primary')
+@push('scripts')
+    <script src="{{ asset('js/portfolio.js') }}" defer></script>
+@endpush
 @section('content')
     <div class="row">
         @foreach($portfolios as $portfolio)

@@ -6,42 +6,30 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
-use Spatie\MediaLibrary\Models\Media;
 
-class Portfolio extends Model implements HasMedia
+class Page extends Model
 {
-    use HasMediaTrait;
+    protected $fillable = ['path'];
 
-    public function registerMediaConversions(Media $media = null)
+    protected $primaryKey = 'path';
+
+    public $incrementing = false;
+
+    public function getRouteKeyName()
     {
-        if ($media->collection_name === 'logo') {
-            $this->addMediaConversion('needed')
-                ->width(config('settings.portfolio.logo.width'))
-                ->height(config('settings.portfolio.logo.height'));
-        }
-
+        return 'path';
     }
-
-    protected $fillable = [
-        'android_link',
-        'apple_link',
-        'year'
-    ];
-
 
     public function allContents(): HasMany
     {
-        return $this->hasMany(PortfolioContent::class);
+        return $this->hasMany(PageContent::class, 'page_path', 'path');
     }
 
     public function contents()
     {
-        return $this->hasMany(PortfolioContent::class)
+        return $this->hasMany(PageContent::class, 'page_path', 'path')
             ->whereIn('language', [App::getLocale(), config('app.default_locale')]);
     }
-
 
     public function trans($attribute, $locale = null)
     {

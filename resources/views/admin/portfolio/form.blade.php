@@ -37,5 +37,15 @@
         <a class="btn-info btn text-white mb-3 add-image">@lang('Add image')</a>
         <input class="form-control-file mb-1" type="file" id="gallery" name="images[]"/>
     </div>
+    @push('scripts')
+
+        <script>
+            $(document).ready(function () {
+                $(".add-image").click(function () {
+                    $(this).siblings('input').eq(0).clone().appendTo($(this).parent());
+                });
+            });
+        </script>
+    @endpush
 
 </div>

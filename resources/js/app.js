@@ -3,9 +3,7 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-
 require('./bootstrap');
-require('lightgallery/src/js/lightgallery');
 //window.Vue = require('vue');
 
 /**
@@ -33,25 +31,10 @@ const app = new Vue({
 });
 */
 $(document).ready(function () {
-
-    // Открытие полного текста элемента портфолио
-    $(".portfolio__full-text-toggler").click(function () {
-        $(this).parents('.portfolio').find(".portfolio__full-text").toggleClass("portfolio__full-text_show");
-    });
-
-    // Включение галереи для портфолио
-    $('.portfolio__links-container').lightGallery({
-        selector: '.gallery-image',
-    });
-
     // Отображение меню на маленьких разрешениях
     $(".menu-toggler").click(function () {
         $(".menu").toggleClass('menu-active');
         $(".overlay").toggleClass('overlay-active');
-    });
-
-    $(".add-image").click(function () {
-        $(this).siblings('input').eq(0).clone().appendTo($(this).parent());
     });
 });
 

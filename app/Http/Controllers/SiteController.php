@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Page;
 use App\Models\Portfolio;
 use Illuminate\Http\Request;
 
@@ -22,7 +23,16 @@ class SiteController extends Controller
         $keywords = trans('portfolio keywords');
 
         $h1 = trans('portfolio h1');
-        $portfolios = Portfolio::with(['contents', 'media'])->get();
+        $portfolios = Portfolio::with(['media'])->get();
         return view('site.portfolio', compact('title', 'description', 'keywords', 'h1', 'portfolios'));
+    }
+
+    public function page(Page $page)
+    {
+        $title = $page->trans('title');
+        $description = $page->trans('description');
+        $keywords = $page->trans('keywords');
+        $h1 = $page->trans('h1');
+        return view('site.page', compact('title', 'description', 'keywords', 'h1', 'page'));
     }
 }

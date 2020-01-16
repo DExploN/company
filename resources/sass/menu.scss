@@ -6,6 +6,7 @@
     top: 60px;
     margin-left: -280px;
     transition: margin-left 0.3s;
+    z-index: 999 !important;
 
     &__languages {
         background-color: $blue-grey;
@@ -75,7 +76,7 @@
 
 .menu-active {
     margin-left: 0 !important;
-    z-index: 999 !important;
+
 }
 
 @media all and (min-width: 992px) {

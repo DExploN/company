@@ -12,8 +12,7 @@
     @if(isset($keywords))
         <meta name="keywords" content="{{$keywords}}"/>
 @endif
-<!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
@@ -52,11 +51,19 @@
                             class="menu__link-picture fas fa-user-plus fa-fw"></i>@lang('Jobs')</a>
                 </li>
 
+
                 @auth()
                     <h5 class="menu__admin-title">@lang('Admin dashboard')</h5>
 
-                    <li><a class="menu__link" href="{{route('admin.portfolio.index')}}"><i
+                    <li>
+                        <a class="menu__link @if(strpos(request()->route()->getAction('as'),'admin.portfolio')===0) menu__link-active @endif"
+                           href="{{route('admin.portfolio.index')}}"><i
                                 class="menu__link-picture fas fa-briefcase fa-fw"></i>@lang('Portfolio')</a>
+                    </li>
+                    <li>
+                        <a class="menu__link @if(strpos(request()->route()->getAction('as'),'admin.page')===0) menu__link-active @endif"
+                           href="{{route('admin.page.index')}}"><i
+                                class="menu__link-picture fas fa-file fa-fw"></i>@lang('Pages')</a>
                     </li>
                     <li><a class="menu__link" href="/admin/translations">
                             <i class="menu__link-picture fas fa-language fa-fw"></i>@lang('Translation manager')</a>
@@ -112,14 +119,19 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-            @endif
+                @endif
 
-            @yield('content')
+                @yield('content')
         </div>
     </main>
     <div class="overlay menu-toggler"></div>
 </div>
+<!-- Scripts -->
 <!-- its stop transition css bug -->
 <script></script>
+@prepend('scripts')
+    <script src="{{ asset('js/app.js') }}"></script>
+@endprepend
+@stack('scripts')
 </body>
 </html>

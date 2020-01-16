@@ -113,10 +113,6 @@ class PortfolioController extends Controller
 
     public function updateLang(UpdateLangRequest $request, Portfolio $portfolio)
     {
-        Validator::make($request->all(), [
-            'title' => 'required|unique:posts|max:255',
-            'body' => 'required',
-        ])->validate();
         PortfolioContent::updateOrCreate(
             ['language' => $request->input('language'), 'portfolio_id' => $portfolio->id],
             $request->only(['title', 'description', 'text'])
