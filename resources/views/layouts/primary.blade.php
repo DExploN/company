@@ -41,6 +41,7 @@
                 @endforeach
             </div>
             <ul class="menu__list">
+                @include('composers.left_menu')
                 <li><a class="menu__link" href="/"><i
                             class="menu__link-picture fas fa-address-card fa-fw"></i>@lang('About company')</a></li>
                 <li><a class="menu__link" href="{{route('portfolio.index')}}"><i
@@ -68,6 +69,13 @@
                     <li><a class="menu__link" href="/admin/translations">
                             <i class="menu__link-picture fas fa-language fa-fw"></i>@lang('Translation manager')</a>
                     </li>
+
+                    <li>
+                        <a class="menu__link @if(strpos(request()->route()->getAction('as'),'admin.menu')===0) menu__link-active @endif"
+                           href="{{route('admin.menu.index')}}">
+                            <i class="menu__link-picture fab fa-elementor fa-fw"></i>@lang('Menu')</a>
+                    </li>
+
                     <li>
                         <a class="menu__link" href="{{ route('logout') }}"
                            onclick="event.preventDefault();

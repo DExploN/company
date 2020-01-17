@@ -29,6 +29,9 @@ Route::prefix(LaravelLocalization::setLocale())
                 Route::delete('/page/{page}/destroy-lang', 'pageController@destroyLang')->name('page.destroy-lang');
 
                 Route::resource('portfolio', 'PortfolioController')->except(['show']);
+
+                Route::resource('menu', 'MenuController')->only(['index', 'update', 'destroy', 'store']);
+
                 Route::put('/portfolio/{portfolio}/update-lang', 'PortfolioController@updateLang')->name('portfolio.update-lang');
                 Route::delete('/portfolio/{portfolio}/destroy-lang', 'PortfolioController@destroyLang')->name('portfolio.destroy-lang');
             });

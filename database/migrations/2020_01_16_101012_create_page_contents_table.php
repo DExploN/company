@@ -23,7 +23,7 @@ class CreatePageContentsTable extends Migration
             $table->text('h1');
             $table->text('text');
             $table->timestamps();
-            $table->foreign('page_path')->references('path')->on('pages')->onDelete('cascade');
+            $table->foreign('page_path')->references('path')->on('pages')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

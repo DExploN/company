@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Menu;
 use App\Models\Page;
 use App\Models\PageContent;
 use Illuminate\Database\Seeder;
@@ -23,6 +24,13 @@ class PageSeeder extends Seeder
                 $contents[] = factory(PageContent::class)->make(['language' => $localeCode]);
             }
             $page->contents()->saveMany($contents);
+
+            (new Menu([
+                'path' => '/' . $page->path,
+                'active_path' => '/' . $page->path,
+                'title' => $faker->unique()->word(),
+                'fa_code' => 'fas fa-address-card',
+            ]))->save();
         });
     }
 }
