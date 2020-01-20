@@ -3,10 +3,27 @@
     position: fixed;
     background-color: #fff;
     height: 100%;
-    top: 60px;
+    top: 0px;
+    padding-top: 60px;
     margin-left: -280px;
     transition: margin-left 0.3s;
-    z-index: 999 !important;
+    z-index: 901 !important;
+    display: flex;
+    flex-direction: column;
+
+    &__point {
+        position: absolute;
+        width: 0;
+        height: 0;
+        background-color: $site-green;
+        border-radius: 50%;
+        opacity: 0.3;
+    }
+
+    &__list {
+        overflow-y: auto;
+        flex: 1 1 auto;
+    }
 
     &__languages {
         background-color: $blue-grey;
@@ -14,6 +31,7 @@
         justify-content: center;
         padding-bottom: 1.5rem;
         padding-top: 1.5rem;
+        flex-shrink: 0;
     }
 
     &__lang {
@@ -46,6 +64,8 @@
         align-items: center;
         display: flex;
         transition: background-color 0.2s;
+        position: relative;
+        overflow: hidden;
     }
 
     &__link-picture {
@@ -81,12 +101,15 @@
 
 @media all and (min-width: 992px) {
     .menu {
-        top: 196px;
+        padding-top: 196px;
         margin-left: 0;
 
         &__languages {
             padding-top: 0;
         }
+    }
+    .overlay {
+        display: none !important;
     }
 }
 
@@ -96,7 +119,7 @@
     width: 100vw;
     height: 100vh;
     background: rgba(0, 0, 0, 0.7);
-    z-index: 998;
+    z-index: 900;
     opacity: 0;
     top: 60px;
     transition: all 0.3s;

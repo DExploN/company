@@ -36,6 +36,16 @@ $(document).ready(function () {
         $(".menu").toggleClass('menu-active');
         $(".overlay").toggleClass('overlay-active');
     });
+    //Анимация круга при клике на меню
+    $(".menu__link").click(function (event) {
+        $(".menu__point").remove();
+        let x = event.pageX - $(this).position().left;
+        let y = event.pageY - $(this).position().top;
+        let point = $('<span class="menu__point"></span>');
+        $(this).append(point);
+        point.css({top: y, left: x, height: 0, width: 0});
+        point.animate({top: y - 300, left: x - 300, height: 600, width: 600}, 500);
+    });
 });
 
 

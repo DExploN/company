@@ -21,10 +21,10 @@ class SiteController extends Controller
         $title = trans('portfolio title');
         $description = trans('portfolio description');
         $keywords = trans('portfolio keywords');
-
+        $h1FaImage = 'fas fa-briefcase';
         $h1 = trans('portfolio h1');
         $portfolios = Portfolio::with(['media'])->get();
-        return view('site.portfolio', compact('title', 'description', 'keywords', 'h1', 'portfolios'));
+        return view('site.portfolio', compact('title', 'description', 'keywords', 'h1', 'portfolios', 'h1FaImage'));
     }
 
     public function page(Page $page)

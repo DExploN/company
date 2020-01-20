@@ -13,7 +13,7 @@
         <meta name="keywords" content="{{$keywords}}"/>
 @endif
 
-    <!-- Styles -->
+<!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
@@ -40,7 +40,8 @@
                     </a>
                 @endforeach
             </div>
-            <ul class="menu__list">
+
+            <ul class="menu__list disable-scrollbars">
                 @include('composers.left_menu')
                 <li><a class="menu__link" href="/"><i
                             class="menu__link-picture fas fa-address-card fa-fw"></i>@lang('About company')</a></li>
@@ -93,7 +94,8 @@
         @if(isset($h1))
             <div class="title-box">
                 <div class="container ">
-                    <i class="title-box__picture fas fa-briefcase fa-fw"></i>
+
+                    @if(isset($h1FaImage))<i class="title-box__picture {{$h1FaImage}} fa-fw"></i>@endif
                     <h1 class="title-box__text">{{$h1}}</h1>
                 </div>
             </div>
@@ -127,9 +129,9 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                @endif
+            @endif
 
-                @yield('content')
+            @yield('content')
         </div>
     </main>
     <div class="overlay menu-toggler"></div>
