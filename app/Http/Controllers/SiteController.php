@@ -33,6 +33,7 @@ class SiteController extends Controller
         $description = $page->trans('description');
         $keywords = $page->trans('keywords');
         $h1 = $page->trans('h1');
-        return view('site.page', compact('title', 'description', 'keywords', 'h1', 'page'));
+        $h1FaImage = $page->fa_code;
+        return view('site.page', compact('title', 'description', 'keywords', 'h1', 'page', 'h1FaImage'));
     }
 }

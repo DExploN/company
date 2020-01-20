@@ -48,7 +48,7 @@ class PageController extends Controller
     {
 
 
-        $page = new Page($request->only(['path']));
+        $page = new Page($request->only(['path', 'fa_code']));
         $page->save();
 
         $PageContent = new PageContent($request->only(['title', 'description', 'text', 'h1', 'keywords']));
@@ -82,7 +82,7 @@ class PageController extends Controller
     public function update(UpdateRequest $request, Page $page)
     {
 
-        $page->fill($request->only(['path']));
+        $page->fill($request->only(['path', 'fa_code']));
         $page->save();
 
         PageContent::updateOrCreate(

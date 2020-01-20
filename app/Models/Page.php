@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class Page extends Model
 {
-    protected $fillable = ['path'];
+    protected $fillable = ['path', 'fa_code'];
 
     protected $primaryKey = 'path';
 

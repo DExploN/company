@@ -54,4 +54,7 @@
         </form>
         </tbody>
     </table>
+    <div class="text-muted">
+        /portfolio - @lang('Portfolio')
+    </div>
 @endsection

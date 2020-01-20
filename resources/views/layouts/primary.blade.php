@@ -43,17 +43,6 @@
 
             <ul class="menu__list disable-scrollbars">
                 @include('composers.left_menu')
-                <li><a class="menu__link" href="/"><i
-                            class="menu__link-picture fas fa-address-card fa-fw"></i>@lang('About company')</a></li>
-                <li><a class="menu__link" href="{{route('portfolio.index')}}"><i
-                            class="menu__link-picture fas fa-briefcase fa-fw"></i>@lang('Portfolio')</a>
-                </li>
-                <li>
-                    <a class="menu__link" href="#"><i
-                            class="menu__link-picture fas fa-user-plus fa-fw"></i>@lang('Jobs')</a>
-                </li>
-
-
                 @auth()
                     <h5 class="menu__admin-title">@lang('Admin dashboard')</h5>
 
@@ -93,7 +82,7 @@
     <main id="right-column">
         @if(isset($h1))
             <div class="title-box">
-                <div class="container ">
+                <div class="container d-flex">
 
                     @if(isset($h1FaImage))<i class="title-box__picture {{$h1FaImage}} fa-fw"></i>@endif
                     <h1 class="title-box__text">{{$h1}}</h1>

@@ -15,6 +15,7 @@ class CreatePagesTable extends Migration
     {
         Schema::create('pages', function (Blueprint $table) {
             $table->char('path', 100);
+            $table->text('fa_code', 100)->nullable();
             $table->timestamps();
             $table->primary('path');
         });
