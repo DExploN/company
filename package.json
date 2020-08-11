@@ -29,6 +29,6 @@
     "dependencies": {
         "lightgallery": "^1.6.12",
         "normalize.css": "^8.0.1",
-        "tinymce": "^4.9.7"
+        "tinymce": "^4.9.11"
     }
 }
